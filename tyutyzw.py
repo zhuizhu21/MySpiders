@@ -36,10 +36,14 @@ titleAll=bsObj.find_all('a',{'style':'TEXT-DECORATION: none; text-align:left;'})
 
 timeAll=bsObj.find_all('span',{"style":"BACKGROUND-COLOR: #efefef"})
 
-
+res=""
 for i in range(len(titleAll)):
     title=titleAll[i].get_text()
     time=str(timeAll[i].get_text().encode()).split(' ')[1][-10:]
-    print(time,title)
+    res+=time+' '+title+'\n'
 
-URL="https://sc.ftqq.com/SCU96652Tc0c696410a2ae2a2beb33f1bab3fbc815eb21b7f74246.send?text=%s&desp=%s"%(text,desp)
+URL="https://sc.ftqq.com/SCU96652Tc0c696410a2ae2a2beb33f1bab3fbc815eb21b7f74246.send"
+
+info="2020-05-05 关于公布2020年研招一志愿校内调剂审核结果的通知"
+data={'text':info,'desp':res}
+print(requests.post(URL,data=data))
